@@ -2,7 +2,7 @@ FROM node:18
 
 RUN mkdir excalidraw
 
-COPY . ./excalidraw
+COPY package.json yarn.lock ./excalidraw
 
 ARG NODE_ENV=production
 
