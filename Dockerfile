@@ -1,15 +1,12 @@
 FROM node:18
 
-
 RUN mkdir excalidraw
 
 COPY . ./excalidraw
 
+ARG NODE_ENV=production
+
 WORKDIR ./excalidraw
-
-ARG NODE_ENV=development
-
-ENV VITE_APP_PORT=1337
 
 RUN yarn --ignore-optional
 
