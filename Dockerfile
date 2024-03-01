@@ -1,17 +1,18 @@
-FROM node:18 AS build
+FROM node:18
 
-WORKDIR /opt/node_app
 
-COPY package.json yarn.lock ./
-RUN yarn --ignore-optional --network-timeout 600000
+RUN mkdir excalidraw
 
-ARG NODE_ENV=production
+COPY . ./excalidraw
 
-COPY . .
-RUN yarn build:app:docker
+WORKDIR ./excalidraw
 
-FROM nginx:1.21-alpine
+ARG NODE_ENV=development
 
-COPY --from=build /opt/node_app/build /usr/share/nginx/html
+ENV VITE_APP_PORT=1337
 
-HEALTHCHECK CMD wget -q -O /dev/null http://localhost || exit 1
+RUN yarn --ignore-optional
+
+EXPOSE 3000
+
+CMD [ "yarn", "start"]
