@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:18-slim
 
 RUN mkdir excalidraw
 
@@ -9,6 +9,8 @@ ARG NODE_ENV=production
 WORKDIR ./excalidraw
 
 RUN yarn --ignore-optional
+
+RUN yarn cache clean
 
 EXPOSE 3000
 
